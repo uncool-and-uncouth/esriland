@@ -4250,9 +4250,9 @@ module.exports = Math.scale || function scale(x, inLow, inHigh, outLow, outHigh)
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-  gameWidth: 760,
-  gameHeight: 400,
-  localStorageName: 'phaseres6webpack',
+  gameWidth: 640,
+  gameHeight: 576,
+  localStorageName: 'esriland',
   webfonts: ['Bangers']
 });
 
