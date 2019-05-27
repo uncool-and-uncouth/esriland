@@ -1,3 +1,0 @@
-# Esriland
-
-Phaser game test. 
