@@ -15,13 +15,25 @@ export default class GameScene extends Scene {
         this.comp.setInteractive()
         this.createWalkCycle()
         this.createIdle()
+        this.createJump()
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     update() {
         if (this.cursors.right.isDown)
         {
+            this.comp.flipX = false
             this.walk()
+            this.comp.x += 5
+        }
+        else if (this.cursors.left.isDown) {
+
+            this.comp.flipX = true
+            this.walk()
+            this.comp.x -= 5
+        }
+        else if (this.cursors.space.isDown) {
+            // jamp
         }
         else {
             this.comp.play('turn')
@@ -47,6 +59,14 @@ export default class GameScene extends Scene {
             frames: [ { key: 'comp', frame: 0 } ],
             frameRate: 20
         });
+    }
+
+    createJump() {
+        this.anims.create({
+            key: 'jump',
+            frames: [ {key: 'comp', frame: 1}],
+            frameRate: 20
+        })
     }
 
     walk() {
