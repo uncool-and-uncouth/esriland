@@ -1,5 +1,7 @@
 import {Scene} from 'phaser'
 import compSheet from './assets/comp_sheet-lg.png'
+import platforms from './assets/esriland.png'
+
 
 
 export default class GameScene extends Scene {
@@ -8,15 +10,31 @@ export default class GameScene extends Scene {
     }
 
     preload() {
+        this.load.image('platforms', platforms)
         this.load.spritesheet('comp', compSheet, { frameWidth: 128, frameHeight: 128 })
+        
      }
     create() {
-        this.comp = this.add.sprite(300, this.game.config.height/2, 'comp')
+
+        this.platforms = this.physics.add.image(0, 0, 'platforms')
+        this.platforms.setOrigin(0, 0.3)
+        this.platforms.setImmovable(true)
+        this.platforms.body.allowGravity = false
+        //this.platforms.refreshBody()
+        
+        
+
+
+        this.comp = this.physics.add.sprite(300, this.game.config.height/2, 'comp')
         this.comp.setInteractive()
         this.createWalkCycle()
         this.createIdle()
         this.createJump()
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.comp.setCollideWorldBounds(true)
+
+        this.physics.add.collider(this.comp, this.platforms)
+        
     }
 
     update() {
@@ -32,9 +50,9 @@ export default class GameScene extends Scene {
             this.walk()
             this.comp.x -= 5
         }
-        else if (this.cursors.space.isDown) {
-            // jamp
-        }
+        // else if (this.cursors.space.isDown) {
+        //     // jamp
+        // }
         else {
             this.comp.play('turn')
         }
